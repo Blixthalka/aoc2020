@@ -1,4 +1,4 @@
--module(solution01).
+-module(solution).
 -export([part1/0, part2/0]).
 
 %% Part 1
@@ -33,5 +33,5 @@ read_input() ->
     {ok, Data} = file:read_file("input.txt"),
     Strings = string:split(Data, "\n", all),
     Pairs = [string:to_integer(X) || X <- Strings],
-    {Result, _} = lists:unzip(Pairs),
+    {Result, _} = lists:unzip(Pairs),   
     Result.
