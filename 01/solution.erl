@@ -8,10 +8,10 @@ search_part1([]) -> 0;
 search_part1([H | T]) -> search_part1(H, T) + search_part1(T).
 
 search_part1(_, []) -> 0;
-search_part1(V, [H | T]) ->
-    if V + H =:= 2020 -> V * H;
-       true -> search_part1(V, T)
-    end.
+search_part1(V, [H | _]) when V + H =:= 2020 -> 
+    V * H;
+search_part1(V, [_ | T]) -> 
+    search_part1(V, T).
 
 %% Part 2
 part2() -> search_part2(read_input()).
