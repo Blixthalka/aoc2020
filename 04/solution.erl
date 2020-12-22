@@ -57,7 +57,7 @@ valid_height(Value) ->
     case Unit of 
         "cm" -> in_interval(Number, 150, 193);
         "in" -> in_interval(Number, 59, 76);
-        _Else -> false
+        ____ -> false
     end.
 
 in_interval(Value, Min, Max) -> 
