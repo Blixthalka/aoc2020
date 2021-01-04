@@ -4,9 +4,9 @@
 
 %% Part 1
 part1() ->
-    sum([currect_sequence(Line) || Line <- read_input()]).
+    lists:sum(lists:map(fun correct_sequence/1, read_input())).
 
-currect_sequence({Min, Max, Letter, Sequence}) ->
+correct_sequence({Min, Max, Letter, Sequence}) ->
     Letters = occurance_of_letter(Letter, Sequence, 0),
     case Letters of
         L when L >= Min, L =< Max -> 1;
@@ -21,7 +21,7 @@ occurance_of_letter(Letter, [H | T], Sum) ->
     end.
 
 %% Part 2
-part2() -> sum([right_index(Line) || Line <- read_input()]).
+part2() -> lists:sum(lists:map(fun right_index/1, read_input())).
 
 right_index({First, Second, Letter, Sequence}) ->
     Found = right_index(First, Second, Letter, Sequence, 1),
@@ -49,9 +49,6 @@ compare_letter(Letter, H) ->
     end.
 
 %% Common
-sum([]) -> 0;
-sum([H | T]) -> H + sum(T).
-
 read_input() ->
     {ok, Data} = file:read_file("input.txt"),
     Lines = string:split(Data, "\n", all),
