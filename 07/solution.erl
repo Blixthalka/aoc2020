@@ -5,7 +5,7 @@
 %% Part 1
 part1() ->
     Bags = read_input(),
-   sum(map(fun(X) -> fits_gold(X, Bags) end, Bags)).
+    sum(map(fun(X) -> fits_gold(X, Bags) end, Bags)).
 
 fits_gold({_, CanContain}, Bags) -> 
     Result = search(CanContain, Bags),
@@ -24,7 +24,17 @@ find_bag_by_key(_, []) -> error;
 find_bag_by_key(Key, [_|T]) -> find_bag_by_key(Key, T).
 
 %% Part 2
-part2() -> 2.
+part2() -> 
+    Bags = read_input(),
+    find_gold(Bags).
+
+find_gold(Bags) -> 
+    [{_, CanContain}] = lists:filter(fun ({Key,_}) -> Key =:= "shiny gold" end, Bags),
+    search2(CanContain, Bags) - 1.
+
+search2([], _) -> 1;
+search2([{Key, Num}|T], Bags) ->
+    Num * search2(find_bag_by_key(Key, Bags), Bags) + search2(T, Bags).
 
 %% Common 
 read_input() ->
